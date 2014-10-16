@@ -1,0 +1,77 @@
+~~~~~~~~~~~~~
+~~~MODULES~~~
+~~~~~~~~~~~~~
+
+-Timer
+	-1 of them
+		-trigger every so often
+			-for testing
+				-500ms
+			-for field use
+				-30s
+		-used to tell the chip when to figure out the temp and display it
+		*used to wake up chip from sleep?
+		*use to put the chip back to sleep?
+			*should sleep stuff be done in an ISR
+
+-A2D
+	-1 of them
+	-every time the timer procs
+	-run an A2D on the thermo-transistor thing voltage output
+	-used to figure out the temperature
+		-This could be a table from the datasheet
+			-which may need calibration
+				-because who can really trust a product engineer
+		-This could be a lookup table I generate
+			-based on a function curve in the datasheet
+		-This could be a ratio if the volts per degree of temperature is linear
+			-math
+				-floating point probably
+					-accuracy is not that important for the system requirements
+						-so truncate it (just use integer types anyway)
+		-This could be a function
+			-either given to me, or derived (I hope not...)
+			-probably will need some adjustment
+			-lookup table unecessary
+				-we are not in a time critical scenario
+
+-UART
+	-send the temperature out to the serial LCD 
+		-LCD is detachable, it would kinda be a misuse of a 20$ screen for this simple a system
+	-This will require a translation 
+		-from the temperature number I found from the A2D
+		-to the character I need to send to the LCD
+
+-GPIOs
+	-3, 8-segment displays should provide sufficient readout
+		-such as over 100 degrees, or less than 0 -> (-20 degrees)
+	-Research needed to figure out how to work those things
+	-I think I can use 2 pins and 3 shift registers
+		-one pin for outputing the states
+		-one pin for clocking the shift register
+		-based on what sequence of numbers I need
+			-I coorespond each number to a binary sequence
+				*8 or 16 bits needed will be determined later
+			-bitwise-and the lsb with 0x01
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
