@@ -44,11 +44,42 @@
 
 -GPIOs
 	-3, 8-segment displays should provide sufficient readout
-		-such as over 100 degrees, or less than 0 -> (-20 degrees)
+		-such as over "100" degrees, or less than 0 -> ("-20" degrees)
 	-Research needed to figure out how to work those things
 	-I think I can use 2 pins and 3 shift registers
-		-one pin for outputing the states
+-one pin for outputing the states
 		-one pin for clocking the shift register
+
+~~~~~~~~~~~~
+
+~~~~~~~~~~~~
+~~~CODE~~~~~
+~~~~~~~~~~~~
+
+-main
+	-startup check
+	-config clock
+		-start at max speed when prototyping
+		-slow down to minimal clock speed when transitioning to finished product
+			!This will be done last
+	-configure pins
+		-GPIOs
+			-1 Output for 8-Segment data
+			-1 Output for 8-Segment clock pulses
+			-1 Input
+				-Analog
+				-all other pins Digital
+			-write all digital pins low
+		-UART
+			-Tx
+			
+
+
+
+
+		
+
+
 		-based on what sequence of numbers I need
 			-I coorespond each number to a binary sequence
 				*8 or 16 bits needed will be determined later
